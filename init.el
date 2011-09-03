@@ -1,6 +1,6 @@
 ; -*- emacs-lisp -*-
 ;
-; dot.emacs
+; init.el
 ;
 ; NOTE: to use this file: ln -s ~/<path>/dot.emacs ~/.emacs
 ; (server-start) ;; don't really use this much
