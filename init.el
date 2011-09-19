@@ -62,7 +62,7 @@
 ; 
 (defun my-python-mode-hook ()
   (require 'virtualenv)
-  (c-subword-mode t)     ; add camel case as word boundaries
+  (subword-mode t)     ; add camel case as word boundaries
   (delete-selection-mode t)     ; overwrite selection with typing
   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
   ;; (setq indent-tabs-mode nil) ; disable tab indents
@@ -241,8 +241,8 @@ non-whitespace character"
 ;
 ; DVC
 ;
-;(load-file (concat package-dir "dvc/dvc-load.el"))
-;(setq dvc-tips-enabled nil)
+(load-file (concat package-dir "dvc/dvc-load.el"))
+(setq dvc-tips-enabled nil)
 
 ;; save the history to an external file
 (require 'savehist)
