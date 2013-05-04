@@ -8,7 +8,7 @@
 (add-hook 'after-init-hook '(lambda () (load-library "init-packages")))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
+;(require 'el-get)
 
 (setq my-packages
       '(zenburn-theme
