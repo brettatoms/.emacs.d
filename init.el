@@ -41,7 +41,7 @@
     (when (not (package-installed-p pkg))
       	(message "** installing %s ... " pkg)
 	(package-install pkg)))
-  (message ("** installed all packages")))
+  (message "** installed all packages"))
 
 
 (defun install-el-get ()
