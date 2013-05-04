@@ -21,6 +21,8 @@
 	multiple-cursors
 	goto-last-change
 	; volatile-highlights
+	magit
+	lusty-explorer
 
 	;; mode for web dev
 	js2-mode
