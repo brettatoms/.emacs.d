@@ -113,7 +113,7 @@
 ; uniquify has to be loaded after Pymacs or we get lots of
 ; max-lisp-eval-depth errors
 (load-library "uniquify") ; uniquify buffer names
-(setq uniquify-buffer-name-style  'post-forward)
+(setq uniquify-buffer-name-style 'post-forward)
 
 (defun kill-forward-whitespace ()
   "Kill the whitespace from the current position until the next
@@ -182,7 +182,7 @@ non-whitespace character"
 ;; ask user whether to restore desktop at start-up
 (if (saved-session)
     (if (y-or-n-p "Restore desktop? ")
-	(session-restore)))))
+	(session-restore)))
 ;; (add-hook 'after-init-hook
 ;; 	  '(lambda ()
 ;; 	     (if (saved-session)
