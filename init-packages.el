@@ -31,6 +31,12 @@
 )
 
 ;;
+;; lusty-explorer
+;;
+(when (package-installed-p 'lusty-explorer)
+  (lusty-explorer-mode t))
+
+;;
 ;; autopair
 ;; 
 (when (package-installed-p 'autopair)
@@ -58,8 +64,8 @@
 )
 
 
-(require 'ido)
-(ido-mode t)
+;(require 'ido)
+;(ido-mode t)
 
 ;; mode line settings
 (column-number-mode t) ; show column number
