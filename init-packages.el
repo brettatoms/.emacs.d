@@ -66,11 +66,17 @@
 ;;
 ;; Project for project management
 ;; 
-(when (package-isntalled-p 'projectile)
+(when (package-installed-p 'projectile)
   (projectile-global-mode)
 )
-projectile
 
+
+;;
+;;
+;;
+(when (package-installed-p 'magit)
+  (global-set-key "\C-cvs" 'magit-status)
+)
 
 ;(require 'ido)
 ;(ido-mode t)
