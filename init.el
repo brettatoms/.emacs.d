@@ -23,6 +23,7 @@
 	; volatile-highlights
 	magit
 	lusty-explorer
+	projectile
 
 	;; mode for web dev
 	js2-mode

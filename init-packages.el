@@ -63,6 +63,14 @@
   (global-set-key (kbd "C-\\") 'goto-last-change)
 )
 
+;;
+;; Project for project management
+;; 
+(when (package-isntalled-p 'projectile)
+  (projectile-global-mode)
+)
+projectile
+
 
 ;(require 'ido)
 ;(ido-mode t)
