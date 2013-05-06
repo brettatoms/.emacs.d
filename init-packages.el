@@ -76,6 +76,7 @@
 ;;
 (when (package-installed-p 'magit)
   (global-set-key "\C-cvs" 'magit-status)
+  (global-set-key "\C-cvP" 'magit-push) 
 )
 
 ;(require 'ido)
