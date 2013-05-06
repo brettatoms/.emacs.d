@@ -1,1 +1,6 @@
-elpa
+elpa/*
+el-get/*
+old/*
+new/*
+url/*
+emacs-desktop
