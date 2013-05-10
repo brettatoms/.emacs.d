@@ -38,7 +38,7 @@
 
 ;;
 ;; autopair
-;; 
+;;
 (when (package-installed-p 'autopair)
   (autopair-global-mode t))
 
@@ -46,8 +46,8 @@
 ;; jedi-mode
 ;;
 (when (package-installed-p 'jedi-mode)
-  (add-hook 'python-mode-hook 
-	    (lambda ()	    
+  (add-hook 'python-mode-hook
+	    (lambda ()
 	      (auto-complete-mode)
 	      (jedi:ac-setup))))
 
@@ -65,19 +65,59 @@
 
 ;;
 ;; Project for project management
-;; 
+;;
 (when (package-installed-p 'projectile)
   (projectile-global-mode)
 )
 
 
 ;;
-;;
+;; magit
 ;;
 (when (package-installed-p 'magit)
   (global-set-key "\C-cvs" 'magit-status)
-  (global-set-key "\C-cvP" 'magit-push) 
+  (global-set-key "\C-cvP" 'magit-push)
 )
+
+
+;;
+;; js2-mode
+;;
+(when (package-installed-p 'js2-mode)
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+  (defun js2-tab-properly ()
+    (interactive)
+    (let ((yas/fallback-behavior 'return-nil))
+      (unless (yas/expand)
+	(indent-for-tab-command)
+	(if (looking-back "^\s*")
+	    (back-to-indentation)))))
+  ;;(define-key js2-mode-map (kbd "TAB") 'js2-tab-properly)
+
+  (add-hook 'js2-mode-hook
+	    (lambda ()
+          (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
+          ))
+
+)
+
+;;
+;; yasnippet
+;;
+(when (package-installed-p 'yasnippet)
+  (yas-global-mode)
+  ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+)
+
+;;
+;; scss-mode
+;;
+(when (package-installed-p 'scss-mode)
+  (setq scss-compile-at-save nil)
+)
+
+
 
 ;(require 'ido)
 ;(ido-mode t)
@@ -111,6 +151,34 @@
       paragraph-separate "$")
 (set-fill-column 79)
 
+(global-set-key "\C-a" 'back-to-indentation)
+(global-set-key "\M-a" 'move-beginning-of-line)
+
+;; handle indentation and whitespace
+(setq-default indent-tabs-mode nil)
+(setq c-basic-indent 4)
+(setq tab-width 4)
+
+
+;; auto-indent on paste
+(defun yank-and-indent ()
+      "Yank and then indent the newly formed region according to mode."
+      (interactive)
+      (yank)
+      (call-interactively 'indent-region))
+(global-set-key "\C-y" 'yank-and-indent)
+(global-set-key "\C-Y" 'yank)
+
+(add-hook 'after-change-major-mode-hook
+          '(lambda ()
+             (setq-default indent-tabs-mode nil)
+             (setq c-basic-indent 4)
+             (setq tab-width 4)
+             ;;(highlight-tabs)
+             (setq show-trailing-whitespace t)
+
+             ))
+
 
 ; don't use another window for ediff control, was completely
 ; crashing my computer
@@ -118,10 +186,22 @@
 
 
 ;; color shell text
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook
+          #'(lambda ()
+              (ansi-color-for-comint-mode-on)
+              (autopair-mode -1)))
+
+(add-hook 'term-mode-hook
+          #'(lambda ()
+              (ansi-color-for-comint-mode-on)
+              (yas-minor-mode -1)
+              (autopair-mode -1)))
 
 ; allowe recusrive deletes in dired
 (setq dired-recursive-deletes t)
+
+; automatically revert changed buffers
+(global-auto-revert-mode 1)
 
 
 ;; buffer management
@@ -152,12 +232,12 @@ non-whitespace character"
   (if arg
       (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
- 
+
 
 
 (defun sudo-edit-current-file ()
   (interactive)
-  (find-alternate-file (concat "/sudo:root@localhost:" 
+  (find-alternate-file (concat "/sudo:root@localhost:"
 			       (buffer-file-name (current-buffer)))))
 (global-set-key (kbd "C-c C-r") 'sudo-edit-current-file)
 
@@ -209,5 +289,3 @@ non-whitespace character"
 ;; 	     (if (saved-session)
 ;; 		 (if (y-or-n-p "Restore desktop? ")
 ;; 		     (session-restore)))))
-
-
