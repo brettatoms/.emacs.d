@@ -49,7 +49,9 @@
   (add-hook 'python-mode-hook
 	    (lambda ()
 	      (auto-complete-mode)
-	      (jedi:ac-setup))))
+	      (jedi:ac-setup)
+          (setq show-trailing-whitespace t)
+          )))
 
 
 (when (package-installed-p 'multiple-cursors)
@@ -98,8 +100,11 @@
   (add-hook 'js2-mode-hook
 	    (lambda ()
           (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
-          ))
-
+          (setq-default indent-tabs-mode nil)
+          (setq c-basic-indent 4)
+          (setq tab-width 4)
+          ;;(highlight-tabs)
+          (setq show-trailing-whitespace t)))
 )
 
 ;;
@@ -169,17 +174,6 @@
 (global-set-key "\C-y" 'yank-and-indent)
 (global-set-key "\C-Y" 'yank)
 
-(add-hook 'after-change-major-mode-hook
-          '(lambda ()
-             (setq-default indent-tabs-mode nil)
-             (setq c-basic-indent 4)
-             (setq tab-width 4)
-             ;;(highlight-tabs)
-             (setq show-trailing-whitespace t)
-
-             ))
-
-
 ; don't use another window for ediff control, was completely
 ; crashing my computer
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -196,6 +190,7 @@
               (ansi-color-for-comint-mode-on)
               (yas-minor-mode -1)
               (autopair-mode -1)))
+(global-set-key "\C-cs" 'multi-term)
 
 ; allowe recusrive deletes in dired
 (setq dired-recursive-deletes t)
