@@ -24,6 +24,7 @@
 	magit
 	lusty-explorer
 	projectile
+        yasnippet
 
 	;; mode for web dev
 	js2-mode
