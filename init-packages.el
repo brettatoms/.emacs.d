@@ -187,7 +187,9 @@
 
 (add-hook 'term-mode-hook
           #'(lambda ()
-              (ansi-color-for-comint-mode-on)
+              ; zenburn like term colors
+              (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"])                         
+              ;(ansi-color-for-comint-mode-off)
               (yas-minor-mode -1)
               (autopair-mode -1)))
 (global-set-key "\C-cs" 'multi-term)
@@ -204,6 +206,7 @@
 ; max-lisp-eval-depth errors
 (load-library "uniquify") ; uniquify buffer names
 (setq uniquify-buffer-name-style 'post-forward)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (defun kill-forward-whitespace ()
   "Kill the whitespace from the current position until the next
