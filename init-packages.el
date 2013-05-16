@@ -66,6 +66,17 @@
 )
 
 ;;
+(when (package-installed-p 'ace-jump-mode)
+  (global-set-key (kbd "C-c s") 'ace-jump-mode)
+  )
+
+(when (package-installed-p 'multiple-cursors)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C->") 'mc/mark-all-like-this)
+)
+
+;;
 ;; Project for project management
 ;;
 (when (package-installed-p 'projectile)
@@ -150,6 +161,8 @@
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(setq scroll-step 3)
+
 ;; set paragraph start for paragraph-fill so it doesn't automatically
 ;; wrap for our "text bullets"
 (setq paragraph-start "\\*+\\|\\-\\|$"
@@ -187,14 +200,16 @@
 
 (add-hook 'term-mode-hook
           #'(lambda ()
-              ; zenburn like term colors
-              (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"])                         
+              ; zenburn like term colors (which for some reason
+              ; stopped working in 24.3)
+              (when (string-match "^24\.[0-2].*?$" emacs-version)
+                (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"]))
               ;(ansi-color-for-comint-mode-off)
               (yas-minor-mode -1)
               (autopair-mode -1)))
-(global-set-key "\C-cs" 'multi-term)
+(global-set-key "\C-ct" 'multi-term)
 
-; allowe recusrive deletes in dired
+; allow recusrive deletes in dired
 (setq dired-recursive-deletes t)
 
 ; automatically revert changed buffers
