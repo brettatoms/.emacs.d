@@ -43,15 +43,19 @@
   (autopair-global-mode t))
 
 ;;
-;; jedi-mode
+;; python mode hook
 ;;
-(when (package-installed-p 'jedi-mode)
-  (add-hook 'python-mode-hook
-	    (lambda ()
-	      (auto-complete-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
+
+            ;; jedi mode
+            (when (package-installed-p 'jedi-mode)
+              (auto-complete-mode)
 	      (jedi:ac-setup)
-          (setq show-trailing-whitespace t)
-          )))
+              (setq show-trailing-whitespace t))
+            ))
+              
 
 
 (when (package-installed-p 'multiple-cursors)
@@ -171,6 +175,8 @@
 
 (global-set-key "\C-a" 'back-to-indentation)
 (global-set-key "\M-a" 'move-beginning-of-line)
+
+(global-subword-mode t)
 
 ;; handle indentation and whitespace
 (setq-default indent-tabs-mode nil)
