@@ -208,6 +208,9 @@
           #'(lambda ()
               ; zenburn like term colors (which for some reason
               ; stopped working in 24.3)
+              (setq multi-term-program nil)
+              (add-to-list 'term-bind-key-alist '("C-c C-c" . term-interrupt-subjob))
+              (add-to-list 'term-bind-key-alist '("C-c C-z" . term-stop-subjob))             
               (when (string-match "^24\.[0-2].*?$" emacs-version)
                 (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"]))
               ;(ansi-color-for-comint-mode-off)
