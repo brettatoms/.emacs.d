@@ -16,6 +16,11 @@
 (when (package-installed-p 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
+;;
+;; disable some packages that come with vanilla emacs that we don't use
+;; 
+(setq vc-handled-backends nil)
+
 
 ;;
 ;; zenburn-theme
