@@ -10,7 +10,12 @@
 ;; (el-get 'sync)
 
 ;; this normally gets filtered from our environment PATH
-(add-to-list 'exec-path "/usr/local/bin")
+;(add-to-list 'exec-path "/usr/local/bin")
+
+;; on mac exec-path doesn't pick up the PATH from the shell
+(when (package-installed-p 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
 
 ;;
 ;; zenburn-theme

@@ -25,6 +25,7 @@
 	lusty-explorer
 	projectile
         yasnippet
+        exec-path-from-shell
 
 	;; mode for web dev
 	js2-mode
