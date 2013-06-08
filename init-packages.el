@@ -154,7 +154,12 @@
   (add-hook 'after-init-hook #'global-flycheck-mode) ; all modes get flycheck
 )
 
-
+;;
+;; expand-region
+;; 
+(when (package-installed-p 'expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+)
 
 ;(require 'ido)
 ;(ido-mode t)

@@ -27,6 +27,7 @@
         yasnippet
         exec-path-from-shell
         virtualenv
+        expand-region
 
 	;; mode for web dev
 	js2-mode
