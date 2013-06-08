@@ -10,7 +10,17 @@
 ;; (el-get 'sync)
 
 ;; this normally gets filtered from our environment PATH
-(add-to-list 'exec-path "/usr/local/bin")
+;(add-to-list 'exec-path "/usr/local/bin")
+
+;; on mac exec-path doesn't pick up the PATH from the shell
+(when (package-installed-p 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+;;
+;; disable some packages that come with vanilla emacs that we don't use
+;; 
+(setq vc-handled-backends nil)
+
 
 ;;
 ;; zenburn-theme
@@ -137,6 +147,13 @@
   (setq scss-compile-at-save nil)
 )
 
+;;
+;; flycheck-mode
+;; 
+(when (package-installed-p 'flycheck-mode)
+  (add-hook 'after-init-hook #'global-flycheck-mode) ; all modes get flycheck
+)
+
 
 
 ;(require 'ido)
@@ -208,6 +225,9 @@
           #'(lambda ()
               ; zenburn like term colors (which for some reason
               ; stopped working in 24.3)
+              (setq multi-term-program nil)
+              (add-to-list 'term-bind-key-alist '("C-c C-c" . term-interrupt-subjob))
+              (add-to-list 'term-bind-key-alist '("C-c C-z" . term-stop-subjob))             
               (when (string-match "^24\.[0-2].*?$" emacs-version)
                 (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"]))
               ;(ansi-color-for-comint-mode-off)
