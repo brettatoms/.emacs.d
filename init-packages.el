@@ -111,7 +111,7 @@
 ;; js2-mode
 ;;
 (when (package-installed-p 'js2-mode)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
   (defun js2-tab-properly ()
     (interactive)
@@ -137,7 +137,7 @@
 ;;
 (when (package-installed-p 'yasnippet)
   (yas-global-mode)
-  ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 )
 
 ;;
