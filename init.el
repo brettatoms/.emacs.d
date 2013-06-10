@@ -27,6 +27,7 @@
         yasnippet
         exec-path-from-shell
         virtualenv
+        expand-region
 
 	;; mode for web dev
 	js2-mode
@@ -68,7 +69,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("4dacec7215677e4a258e4529fac06e0231f7cdd54e981d013d0d0ae0af63b0c8" default)))
- '(safe-local-variable-values (quote ((eval setq flycheck-jshintrc (expand-file-name ".jshintrc" ".")) (eval setq flycheck-tidyrc (expand-file-name ".tidyrc" ".")) (flycheck-tidyrc (eval expand-file-name ".tidyrc" ".")) (flycheck-tidyrc (expand-file-name ".tidyrc" ".")) (flycheck-jshintrc (expand-file-name ".jshintrc" "."))))))
+ '(safe-local-variable-values (quote ((eval setq flycheck-flake8rc (expand-file-name ".jshintrc" (projectile-project-root))) (eval setq flycheck-flake8rc (expand-file-name ".flake8rc" (projectile-project-root))) (eval setq flycheck-jshintrc (expand-file-name ".jshintrc" ".")) (eval setq flycheck-tidyrc (expand-file-name ".tidyrc" ".")) (flycheck-tidyrc (eval expand-file-name ".tidyrc" ".")) (flycheck-tidyrc (expand-file-name ".tidyrc" ".")) (flycheck-jshintrc (expand-file-name ".jshintrc" "."))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

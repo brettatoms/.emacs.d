@@ -112,7 +112,7 @@
 ;; js2-mode
 ;;
 (when (package-installed-p 'js2-mode)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
   (defun js2-tab-properly ()
     (interactive)
@@ -138,7 +138,7 @@
 ;;
 (when (package-installed-p 'yasnippet)
   (yas-global-mode)
-  ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 )
 
 ;;
@@ -155,7 +155,12 @@
   (add-hook 'after-init-hook #'global-flycheck-mode) ; all modes get flycheck
 )
 
-
+;;
+;; expand-region
+;; 
+(when (package-installed-p 'expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+)
 
 ;(require 'ido)
 ;(ido-mode t)
@@ -189,18 +194,18 @@
 ;; wrap for our "text bullets"
 (setq paragraph-start "\\*+\\|\\-\\|$"
       paragraph-separate "$")
-(set-fill-column 79)
+(setq-default fill-column 79)
 
 (global-set-key "\C-a" 'back-to-indentation)
 (global-set-key "\M-a" 'move-beginning-of-line)
 
 (global-subword-mode t)
+(delete-selection-mode 1)
 
 ;; handle indentation and whitespace
 (setq-default indent-tabs-mode nil)
 (setq c-basic-indent 4)
 (setq tab-width 4)
-
 
 ;; auto-indent on paste
 (defun yank-and-indent ()
