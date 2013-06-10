@@ -151,8 +151,9 @@
 ;;
 ;; flycheck-mode
 ;; 
-(when (package-installed-p 'flycheck-mode)
+(when (package-installed-p 'flycheck)
   (add-hook 'after-init-hook #'global-flycheck-mode) ; all modes get flycheck
+  (setq flycheck-highlighting-mode 'lines)
 )
 
 ;;
