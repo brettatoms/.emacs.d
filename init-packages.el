@@ -138,7 +138,6 @@
 ;;
 (when (package-installed-p 'yasnippet)
   (yas-global-mode)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 )
 
 ;;
