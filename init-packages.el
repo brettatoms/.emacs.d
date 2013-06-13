@@ -142,7 +142,9 @@
 ;; yasnippet
 ;;
 (when (package-installed-p 'yasnippet)
-  (yas-global-mode)
+  (yas-global-mode 1)
+  (setq yas-snippet-dirs 
+        (concat data-dir "snippets"))
 )
 
 ;;
