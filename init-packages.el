@@ -109,8 +109,16 @@
 
 
 ;;
-;; js2-mode
+;; js/js2-mode
 ;;
+(defun js-mode-hook ()
+  (add-hook 'before-save-hook 'delete-trailing-whitespace nil t) ;; local hook
+  (setq-default indent-tabs-mode nil)
+  (setq c-basic-indent 4)
+  (setq tab-width 4)
+  ;;(highlight-tabs)
+  (setq show-trailing-whitespace t))
+
 (when (package-installed-p 'js2-mode)
   ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
@@ -123,15 +131,12 @@
 	    (back-to-indentation)))))
   ;;(define-key js2-mode-map (kbd "TAB") 'js2-tab-properly)
 
-  (add-hook 'js2-mode-hook
-	    (lambda ()
-          (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
-          (setq-default indent-tabs-mode nil)
-          (setq c-basic-indent 4)
-          (setq tab-width 4)
-          ;;(highlight-tabs)
-          (setq show-trailing-whitespace t)))
+  (add-hook 'js2-mode-hook 'js-mode-hook)
+	    
 )
+
+(add-hook 'js-mode-hook 'js-mode-hook)         
+
 
 ;;
 ;; yasnippet
