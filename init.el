@@ -28,6 +28,7 @@
         exec-path-from-shell
         virtualenv
         expand-region
+        zencoding-mode
 
 	;; mode for web dev
 	js2-mode

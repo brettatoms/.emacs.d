@@ -41,6 +41,14 @@
    ;(multi-web-global-mode 1)
 )
 
+;
+;; html-mode
+(add-hook 'html-mode-hook 
+	  (lambda () 
+	    (define-key html-mode-map (kbd "M-/") 'zencoding-expand-yas)))
+;;
+
+
 ;;
 ;; lusty-explorer
 ;;
