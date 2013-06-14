@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: resource.query
+# key: rq
+# --
+$1.query($2)
+    .success(function(data, status, headers, config) {
+        $0
+    })
+    .error(function(data, status, headers, config) {
+    
+    });
