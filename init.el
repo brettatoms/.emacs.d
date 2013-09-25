@@ -29,6 +29,7 @@
         virtualenv
         expand-region
         zencoding-mode
+        flx-ido
 
 	;; mode for web dev
 	js2-mode
