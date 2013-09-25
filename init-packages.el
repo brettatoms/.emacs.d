@@ -104,6 +104,9 @@
 ;;
 (when (package-installed-p 'projectile)
   (projectile-global-mode)
+  ;; the "native indexing" takes too long
+  ;(setq projectile-use-native-indexing t)
+  ;(setq projectile-enable-caching t)
 )
 
 
