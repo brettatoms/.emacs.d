@@ -160,8 +160,15 @@
 ;; scss-mode
 ;;
 (when (package-installed-p 'scss-mode)
+  
   (setq scss-compile-at-save nil)
-)
+  (add-hook 'scss-mode-hook
+            #'(lambda ()
+                (ansi-color-for-comint-mode-on)
+                (autopair-mode -1)  ;; autopair cause lock ups in scss mode
+                ))
+  (autopair-mode -1) ;; autopair cause lock ups in scss mode
+  )
 
 ;;
 ;; flycheck-mode
