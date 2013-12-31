@@ -44,9 +44,11 @@
 ;
 ;; html-mode
 (add-hook 'html-mode-hook 
-	  (lambda () 
-	    (define-key html-mode-map (kbd "M-/") 'zencoding-expand-yas)))
-;;
+          #'(lambda ()
+              (yas-minor-mode -1) ;; disable snippets in html mode
+              (define-key html-mode-map (kbd "M-/") 'zencoding-expand-yas)
+              (add-hook 'before-save-hook 'delete-trailing-whitespace nil t) ;; local hook
+              ))
 
 
 ;;
