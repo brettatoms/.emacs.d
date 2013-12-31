@@ -183,7 +183,6 @@
 
 (add-hook 'js-mode-hook 'js-mode-hook)         
 
-
 ;;
 ;; yasnippet
 ;;
@@ -191,7 +190,7 @@
   (yas-global-mode 1)
   (setq yas-snippet-dirs 
         (concat data-dir "snippets"))
-)
+  )
 
 ;;
 ;; scss-mode
@@ -213,6 +212,24 @@
 (when (package-installed-p 'flycheck)
   (add-hook 'after-init-hook #'global-flycheck-mode) ; all modes get flycheck
   (setq flycheck-highlighting-mode 'lines)
+)
+
+
+(when (package-installed-p 'git-gutter) 
+  ;; use the fringe for git-gutter-mode
+  ;(require 'git-gutter-fringe)
+  ;;(global-git-gutter-mode +1)
+  ;; (setq git-gutter:modified-sign "  ") ;; two space
+  ;; (setq git-gutter:added-sign "++")    ;; multiple character is OK
+  ;; (setq git-gutter:deleted-sign "--")
+
+  (setq git-gutter:modified-sign "=") ;; two space
+  (setq git-gutter:added-sign "+")    ;; multiple character is OK
+  (setq git-gutter:deleted-sign "-")
+
+  (set-face-background 'git-gutter:modified "purple") ;; background color
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:deleted "red")
 )
 
 ;;
@@ -238,7 +255,8 @@
 
 (tool-bar-mode -1) ; don't show the toolbar
 
-;(setq visible-bell t) ; flash instead of beep
+(setq visible-bell nil) ; flash instead of beep
+(setq ring-bell-function 'ignore)
 
 ;; highlight the current line
 (global-hl-line-mode 1)
@@ -263,6 +281,8 @@
 
 (global-set-key "\C-a" 'back-to-indentation)
 (global-set-key "\M-a" 'move-beginning-of-line)
+
+(global-set-key "\C-cs" 'replace-string)
 
 (global-subword-mode t)
 (delete-selection-mode 1)
