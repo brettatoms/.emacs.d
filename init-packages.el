@@ -101,6 +101,18 @@
   (global-set-key (kbd "C-c C->") 'mc/mark-all-like-this)
 )
 
+(when (package-installed-p 'auto-complete)
+  (require 'auto-complete-config)
+  (ac-config-default)
+  (global-auto-complete-mode t)
+  ;; Start auto-completion after 2 characters of a word
+  (setq ac-auto-start 2)
+  ;; case sensitivity is important when finding matches
+  (setq ac-ignore-case nil)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  )
+
+
 ;;
 ;; Project for project management
 ;;
