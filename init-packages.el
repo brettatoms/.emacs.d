@@ -188,6 +188,11 @@
   (global-set-key (kbd "C-=") 'er/expand-region)
 )
 
+;; local duplicate line implementation, see duplicate-line.el
+(require 'duplicate-line)
+
+
+
 ;(require 'ido)
 ;(ido-mode t)
 
