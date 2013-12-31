@@ -118,6 +118,9 @@
 ;;
 (when (package-installed-p 'projectile)
   (projectile-global-mode)
+  (define-key projectile-mode-map "\C-cpv" 'magit-status)
+  
+  ;; (global-set-key "\C-cpv" 'magit-status) ; projectile-like
   ;; the "native indexing" takes too long
   ;(setq projectile-use-native-indexing t)
   ;(setq projectile-enable-caching t)
@@ -131,7 +134,8 @@
   (global-set-key "\C-cvs" 'magit-status)
   (global-set-key "\C-cpv" 'magit-status) ; projectile-like
   (global-set-key "\C-cvP" 'magit-push)
-)
+  (setq vc-handled-backends nil)
+  )
 
 
 ;;
