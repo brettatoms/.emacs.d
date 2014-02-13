@@ -15,25 +15,33 @@
 
 	;; misc modes
 	rainbow-mode
-	autopair
+	;;autopair   ; replaced by builtin electric-pair-mode
 	flycheck
 	markdown-mode
 	multiple-cursors
 	goto-last-change
+        dired+
+
 	; volatile-highlights
 	magit
 	lusty-explorer
 	projectile
+        grizzl
         yasnippet
         exec-path-from-shell
         virtualenv
         expand-region
         zencoding-mode
         flx-ido
+        ido-vertical-mode
+        smartparens
+        ace-jump-mode
+        key-chord
 
-	;; mode for web dev
+	;; modes for web dev
 	js2-mode
-	multi-web-mode
+	web-mode
+
 	; css-mode
 	scss-mode
 	sass-mode
@@ -78,9 +86,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#3f3f3f" :foreground "#dcdccc" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "inconsolata"))))
- '(flycheck-error ((t (:underline "red"))) t)
- '(flycheck-fringe-error ((t (:inherit error :foreground "red" :weight bold))) t)
- '(flycheck-fringe-warning ((t (:inherit warning :foreground "yellow3" :weight bold))) t)
- '(flycheck-warning ((t (:underline "yellow3"))) t)
+ '(flycheck-error ((t (:underline "red"))))
+ '(flycheck-fringe-error ((t (:inherit error :foreground "red" :weight bold))))
+ '(flycheck-fringe-warning ((t (:inherit warning :foreground "yellow3" :weight bold))))
+ '(flycheck-warning ((t (:underline "yellow3"))))
+ '(git-gutter-fr:added ((t (:foreground "green4" :weight bold))))
+ '(git-gutter-fr:deleted ((t (:foreground "firebrick" :weight bold))))
+ '(git-gutter-fr:modified ((t (:foreground "darkorange1" :weight bold))))
+ '(git-gutter:added ((t (:foreground "dark green" :inverse-video t :weight bold))))
+ '(git-gutter:deleted ((t (:foreground "dark red" :inverse-video t :weight bold))))
+ '(git-gutter:modified ((t (:foreground "DarkOrange1" :inverse-video t :weight bold))))
  '(mode-line ((t (:background "#2b2b2b" :foreground "#8fb28f" :box nil))))
  '(mode-line-inactive ((t (:inherit mode-line :background "#383838" :foreground "#5f7f5f" :box nil :weight light)))))
