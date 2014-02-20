@@ -21,6 +21,7 @@
 	multiple-cursors
 	goto-last-change
         dired+
+        ag  ;; https://github.com/Wilfred/ag.el
 
 	; volatile-highlights
 	magit
