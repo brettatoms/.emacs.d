@@ -17,6 +17,8 @@
 (setq inhibit-startup-echo-area-message "brett")
 (setq inhibit-startup-message t)
 
+(require 'angular)
+
 ;; on mac exec-path doesn't pick up the PATH from the shell
 (when (package-installed-p 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
