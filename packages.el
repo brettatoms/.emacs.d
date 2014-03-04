@@ -91,6 +91,19 @@
 (when (package-installed-p 'zenburn-theme)
   (load-theme `zenburn t))
 
+
+;;
+;; auto-compile
+;;
+;; auto compile lisp files on save and load
+(when (package-installed-p 'auto-compile)
+  (require 'auto-compile) ;; not sure why this packages needs a require
+  (toggle-auto-compile data-dir 1)
+  (auto-compile-on-load-mode 1)
+  (auto-compile-on-save-mode 1)
+)
+
+
 ;;
 ;; exect-path-from-shell
 ;;

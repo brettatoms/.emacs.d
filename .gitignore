@@ -4,3 +4,9 @@ old/*
 new/*
 url/*
 emacs-desktop
+*.elc
+*#
+ac-comphist.dat
+projectile-bookmarks.eld
+projectile.cache
+.emacs.desktop.lock
