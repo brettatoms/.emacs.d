@@ -4,13 +4,15 @@
 (setq inhibit-startup-echo-area-message "brett")
 (setq inhibit-startup-message t)
 
+;; don't open a new frame when files are drag-n-dropped on emacs windowv
+(setq ns-pop-up-frames nil)
+
 
 ;; mode line settings
 (column-number-mode t) ; show column number
 
 ;(setq linum-format "%d ")
 (global-linum-mode)  ; show the line number in all buffers
-
 (tool-bar-mode -1) ; don't show the toolbar
 
 (setq visible-bell nil) ; flash instead of beep
@@ -42,12 +44,10 @@
 (setq c-basic-indent 4)
 (setq tab-width 4)
 
-
 ;;
 ;; disable some packages that come with vanilla emacs that we don't use
 ;;
 (setq vc-handled-backends nil)
-
 
 ;;
 ;; ido mode
@@ -55,7 +55,6 @@
 (require 'ido)
 (ido-mode 1)
 (ido-everywhere 1)
-
 
 ; enable auto indent and auto pair
 ;(electric-indent-mode t)
@@ -68,16 +67,18 @@
 ; allow recusrive deletes in dired
 (setq dired-recursive-deletes t)
 
-
 ; automatically revert changed buffers
 (global-auto-revert-mode 1)
-
 
 ;; buffer management
 ; uniquify has to be loaded after Pymacs or we get lots of
 ; max-lisp-eval-depth errors
 (load-library "uniquify") ; uniquify buffer names
 (setq uniquify-buffer-name-style 'post-forward)
+
+
+;; delete trailing whitespace by default in all modes
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;
 ;; python mode hook
@@ -94,9 +95,8 @@
               (setq show-trailing-whitespace t))
             ))
 
-
 ;;
-;; js/js2-mode
+;; js/js2-mode hook
 ;;
 (defun js-mode-hook ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t) ;; local hook
@@ -105,7 +105,7 @@
 
   ;; walk up the directory tree looking for a jshint rc
   (setq flycheck-jshintrc  (concat (locate-dominating-file buffer-file-name ".jshintrc") ".jshintrc"))
-  
+
   (when (projectile-project-p)
     ;; use the .jshintrc from the project root
     ;(setq flycheck-jshintrc (concat (projectile-project-root) ".jshintrc"))
@@ -123,13 +123,18 @@
 
 (add-hook 'js-mode-hook 'js-mode-hook)
 
-
-;; color shell text
+;;
+;;  shell-mode-hook
+;;
 (add-hook 'shell-mode-hook
           #'(lambda ()
+              ;; color shell text
               (ansi-color-for-comint-mode-on)
               (autopair-mode -1)))
 
+;;
+;; term-mode-hook
+;;
 (add-hook 'term-mode-hook
           #'(lambda ()
               ; zenburn like term colors (which for some reason

@@ -153,7 +153,7 @@
 ;;
 (when (package-installed-p 'ace-jump-mode)
   (global-set-key (kbd "C-c jw") 'ace-jump-word-mode)
-  (global-set-key (kbd "C-c jc") 'ace-jump-char-mode) 
+  (global-set-key (kbd "C-c jc") 'ace-jump-char-mode)
   (global-set-key (kbd "C-c jl") 'ace-jump-line-mode)
   (global-set-key (kbd "C-c jb") 'ace-jump-mode-pop-mark)
   )
@@ -180,7 +180,7 @@
 
 ;;
 ;; multiple-cursors
-;; 
+;;
 (when (package-installed-p 'multiple-cursors)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -211,7 +211,7 @@
   ;(setq projectile-completion-system 'grizzl)
   (setq projectile-completion-system 'ido)
   (require 'angular)
-  
+
   ;; (global-set-key "\C-cpv" 'magit-status) ; projectile-like
   ;; the "native indexing" takes too long
   ;(setq projectile-use-native-indexing t)
