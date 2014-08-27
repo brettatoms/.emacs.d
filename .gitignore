@@ -10,3 +10,5 @@ ac-comphist.dat
 projectile-bookmarks.eld
 projectile.cache
 .emacs.desktop.lock
+.python-environments
+.mc-lists.el
