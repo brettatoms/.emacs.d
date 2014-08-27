@@ -31,6 +31,8 @@
 	goto-last-change
         dired+
         ag  ;; https://github.com/Wilfred/ag.el
+        smex
+        company-mode
 
 	; volatile-highlights
 	magit
@@ -58,7 +60,8 @@
 	sass-mode
 
 	;; modes for python dev
-	jedi
+	anaconda-mode
+        anaconda-company
 	))
 
 
@@ -113,10 +116,14 @@
 
 ;;
 ;; web-mode - http://web-mode.org
-;; 
+;;
 (when (package-installed-p 'web-mode)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-hook 'web-mode-hook 'html-mode-hook)
+  ;; (add-hook 'before-save-hook 'delete-trailing-whitespace nil t) ;; local hook
+  ;; (add-hook 'web-mode-hook
+  ;;           #'(lambda()
+  ;;               (add-hook 'before-save-hook 'delete-trailing-whitespace nil t) ;; local hook
+  ;;               ))
   )
 
 
@@ -167,7 +174,8 @@
   (key-chord-define-global "jw" 'ace-jump-word-mode)
   (key-chord-define-global "jc" 'ace-jump-char-mode)
   (key-chord-define-global "jl" 'ace-jump-line-mode)
-  (key-chord-define-global "jb" 'ace-jump-mode-pop-mark)
+  (key-chord-define-global "jp" 'ace-jump-mode-pop-mark)
+  (key-chord-define-global "vv" 'projectile-vc)
 )
 
 
@@ -188,18 +196,11 @@
 )
 
 ;;
-;; auto-complete
+;; company-mode
 ;;
 (when (package-installed-p 'auto-complete)
-  (require 'auto-complete-config)
-  (ac-config-default)
-  (global-auto-complete-mode t)
-  ;; Start auto-completion after 2 characters of a word
-  (setq ac-auto-start 2)
-  ;; case sensitivity is important when finding matches
-  (setq ac-ignore-case nil)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
-  )
+  (global-company-mode t)
+)
 
 
 ;;
@@ -244,7 +245,6 @@
   ;; (define-key js2-mode-map (kbd "TAB") 'js2-tab-properly)
 
   (add-hook 'js2-mode-hook 'js-mode-hook)
-
 )
 
 ;;
@@ -357,6 +357,33 @@
 (when (package-installed-p 'dired+)
   ; reuse the same buffer while browsing files
   (toggle-diredp-find-file-reuse-dir 1))
+
+
+;;
+;; easy-kill
+;;
+(when (package-installed-p 'easy-kill)
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark)
+  )
+
+
+;;
+;; powerline
+;;
+(when (package-installed-p 'powerline)
+  (powerline-default-theme)
+  )
+
+
+;;
+;; helm-mode
+;;
+(when (package-installed-p 'helm)
+  (helm-mode t)
+  (global-set-key (kbd "C-c h") 'helm-mini)
+
+)
 
 
 (provide './packages)

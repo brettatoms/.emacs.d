@@ -30,6 +30,12 @@
 
 (setq scroll-step 3)
 
+(defconst emacs-tmp-dir (format "/tmp/emacs-%s" (user-uid)))
+(setq backup-directory-alist
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+
 ;; set paragraph start for paragraph-fill so it doesn't automatically
 ;; wrap for our "text bullets"
 (setq paragraph-start "\\*+\\|\\-\\|$"
@@ -54,7 +60,11 @@
 ;;
 (require 'ido)
 (ido-mode 1)
-(ido-everywhere 1)
+(ido-ubiquitous-mode t)
+(ido-everywhere t)  ;; ido-ubiquitous doesn't work for find-file in an ibuffer
+
+;; disable merging buffer
+(setq ido-auto-merge-work-directories-length -1)
 
 ; enable auto indent and auto pair
 ;(electric-indent-mode t)
@@ -74,26 +84,55 @@
 ; uniquify has to be loaded after Pymacs or we get lots of
 ; max-lisp-eval-depth errors
 (load-library "uniquify") ; uniquify buffer names
-(setq uniquify-buffer-name-style 'post-forward)
+;(setq uniquify-buffer-name-style 'post-forward)
+(setq uniquify-buffer-name-style 'forward)
 
 
 ;; delete trailing whitespace by default in all modes
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;
+;; org mode hook
+;;
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq org-table-automatic-realign t)
+            (setq org-archive-mark-done t)
+            (setq org-archive-stamp-time t)
+            (setq org-archive-default-command 'org-archive-subtree)
+            ))
+
+;;
 ;; python mode hook
 ;;
 (add-hook 'python-mode-hook
           (lambda ()
+            ;; disable default python-run command since its too similiar to the
+            ;; projectile prefix which i use way more
+            (local-unset-key (kbd "C-c C-p"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
             (flycheck-mode t)
+            (setq show-trailing-whitespace t)
+            (anaconda-mode 1)
+            (company-mode 1)
+            )
 
             ;; jedi mode
-            (when (package-installed-p 'jedi-mode)
-              (auto-complete-mode)
-	      (jedi:ac-setup)
-              (setq show-trailing-whitespace t))
-            ))
+            ;; (when (package-installed-p 'jedi-mode)
+            ;;   (auto-complete-mode 1)
+	    ;;   (jedi:ac-setup)
+            ;; )
+
+            ;; anaconda mode
+
+            ;; (when (package-installed-p 'anaconda-mode)
+            ;;   (anaconda-mode 1)
+            ;;   (company-mode 1)
+            ;;   ;(company-anaconda)
+            ;; )
+
+
+)
 
 ;;
 ;; js/js2-mode hook
@@ -119,9 +158,17 @@
   (setq js-indent-level 2)
   ;;(highlight-tabs)
   (setq show-trailing-whitespace t)
+
+  ;; tern mode
+  ;; (tern-mode t)
+  ;; (eval-after-load 'tern
+  ;;  '(progn
+  ;;     (require 'tern-auto-complete)
+  ;;     (tern-ac-setup)))
   )
 
 (add-hook 'js-mode-hook 'js-mode-hook)
+(add-hook 'js2-mode-hook 'js-mode-hook)
 
 ;;
 ;;  shell-mode-hook
@@ -139,11 +186,11 @@
           #'(lambda ()
               ; zenburn like term colors (which for some reason
               ; stopped working in 24.3)
-              (setq multi-term-program nil)
-              (add-to-list 'term-bind-key-alist '("C-c C-c" . term-interrupt-subjob))
-              (add-to-list 'term-bind-key-alist '("C-c C-z" . term-stop-subjob))
-              (when (string-match "^24\.[0-2].*?$" emacs-version)
-                (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"]))
+              ;; (setq multi-term-program nil)
+              ;; (add-to-list 'term-bind-key-alist '("C-c C-c" . term-interrupt-subjob))
+              ;; (add-to-list 'term-bind-key-alist '("C-c C-z" . term-stop-subjob))
+              ;; (when (string-match "^24\.[0-2].*?$" emacs-version)
+              ;;   (setq ansi-term-color-vector [unspecified "#3f3f3f" "#cc9393" "#7f9f7f" "#f0dfaf" "#8cd0d3" "#dc8cc3" "#93e0e3" "#dcdccc"]))
               ;(ansi-color-for-comint-mode-off)
               (yas-minor-mode -1)
               (autopair-mode -1)))
@@ -151,9 +198,9 @@
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
-  (toggle-read-only)
+  (read-only-mode -1)
   (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
+  (read-only-mode t))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 ;; (ignore-errors
 ;;   (require 'ansi-color)
